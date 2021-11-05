@@ -8,9 +8,12 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
 using MvcMovie.Data;
+using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql;
+using Microsoft.AspNetCore.Identity;
+using MvcMovie.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MvcMovie
 {
@@ -27,15 +30,24 @@ namespace MvcMovie
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
-            services.AddDbContext<MvcMovieDbContext>(options => {
-               var connectionString = Configuration.GetConnectionString("MovieApp");
-               var Serverversion = new MariaDbServerVersion(new Version(10, 6, 4));
-                options.UseMySql(connectionString, Serverversion);
+            services.AddDbContext<KatalogDbContext>(option =>
+            {
+                var connectionString = Configuration.GetConnectionString("resep");
+                var serverVersion = new MariaDbServerVersion(new Version(10, 6, 4));
+                option.UseMySql(connectionString, serverVersion);
+                 
             });
-                    
-        }
+            
+            
+            services
+               .AddDefaultIdentity<Pengguna>()
+               .AddEntityFrameworkStores<KatalogDbContext>()
+               .AddDefaultTokenProviders();
+               services.AddRazorPages();
+    }
+        
 
+            
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -54,6 +66,8 @@ namespace MvcMovie
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -61,7 +75,14 @@ namespace MvcMovie
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                    endpoints.MapRazorPages();
             });
+                   
         }
+        public void UseLazyLoadingProxies(IServiceCollection services)
+        {
+            
     }
+        }
+        
 }

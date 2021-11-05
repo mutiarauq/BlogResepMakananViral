@@ -14,12 +14,12 @@ using System.Text.Encodings.Web;
 
 namespace MvcMovie.Controllers
 {
-    public class MoviesController : Controller
+    public class  KatalogController : Controller
     {
 
-        private MvcMovieDbContext _context;
+        private KatalogDbContext _context;
 
-        public MoviesController(MvcMovieDbContext context)
+        public  KatalogController( KatalogDbContext context)
         {
             _context = context;
         }
@@ -28,23 +28,23 @@ namespace MvcMovie.Controllers
         public async Task<IActionResult> Index(string searchString, string movieGenre)
         {
             //SELECT DISTINCT MOVIES.Genre FROM Movies
-            var genres = _context.Movies.Select(x => x.Genre).Distinct();
+            var Bahan = _context.Movies.Select(x => x.Bahan).Distinct();
             var movies = _context.Movies.AsQueryable();
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                movies = movies.Where(x => x.Title.Contains(searchString));
+                movies = movies.Where(x => x.NamaMakanan.Contains(searchString));
             }
 
             if (!string.IsNullOrEmpty(movieGenre))
             {
-                movies = movies.Where(x => x.Genre == movieGenre);
+                movies = movies.Where(x => x.NamaMakanan == movieGenre);
             }
 
             var viewModel = new MovieGenreViewModel()
             {
                 Movies = await movies.ToListAsync(),
-                Genres = new SelectList(await genres.ToListAsync())
+                Genres = new SelectList(await Bahan.ToListAsync())
             };
             return View(viewModel);
         }
@@ -58,7 +58,7 @@ namespace MvcMovie.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public async Task<IActionResult> Create([Bind("Id,NamaMakanan,Kategori,Bahan,Alat,CaraPembuatan")] Movie movie)
         {
             if (ModelState.IsValid)
             {

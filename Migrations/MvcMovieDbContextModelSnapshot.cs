@@ -7,7 +7,7 @@ using MvcMovie.Data;
 
 namespace MvcMovie.Migrations
 {
-    [DbContext(typeof(MvcMovieDbContext))]
+    [DbContext(typeof(KatalogDbContext))]
     partial class MvcMovieDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -23,19 +23,19 @@ namespace MvcMovie.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Genre")
+                    b.Property<string>("NamaMakanan")
                         .HasColumnType("longtext");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Rating")
+                    b.Property<string>("Kategori")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("ReleaseDate")
-                        .HasColumnType("datetime(6)");
+                    b.Property<string>("Bahan")
+                        .HasColumnType("longtext");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("Alat")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("CaraPembuatan")
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");

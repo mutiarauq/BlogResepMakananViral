@@ -8,7 +8,7 @@ using MvcMovie.Data;
 
 namespace MvcMovie.Migrations
 {
-    [DbContext(typeof(MvcMovieDbContext))]
+    [DbContext(typeof(KatalogDbContext))]
     [Migration("20210915015235_Initial")]
     partial class Initial
     {
@@ -25,17 +25,20 @@ namespace MvcMovie.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Genre")
+                    b.Property<string>("NamaMakanan")
                         .HasColumnType("longtext");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<DateTime>("ReleaseDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Title")
+                    b.Property<string>("Kategori")
                         .HasColumnType("longtext");
+
+                    b.Property<string>("Bahan")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Alat")
+                        .HasColumnType("longtext");
+                    b.Property<string>("CaraPembuatan")
+                        .HasColumnType("longtext");
+                        
 
                     b.HasKey("Id");
 

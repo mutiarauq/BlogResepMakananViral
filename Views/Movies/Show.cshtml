@@ -2,20 +2,24 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<h1>Confirm delete"@Html.DisplayFor(modelItem => Model.Title)"?</h1>
+<h1>Confirm delete"@Html.DisplayFor(modelItem => Model.NamaMakanan)"?</h1>
 <table class="table table-hover">
     
     <tr>
         <td>Release Data</td>
-        <td>@Html.DisplayFor(modelItem => Model.ReleaseDate)</td>
+        <td>@Html.DisplayFor(modelItem => Model.Kategori)</td>
     </tr>
     <tr>
         <td>Genre</td>
-        <td>@Html.DisplayFor(modelItem => Model.Genre)</td>
+        <td>@Html.DisplayFor(modelItem => Model.Bahan)</td>
     </tr>
     <tr>
         <td>Price</td>
-        <td>@Html.DisplayFor(modelItem => Model.Price)</td>
+        <td>@Html.DisplayFor(modelItem => Model.Alat)</td>
+    </tr>
+    <tr>
+        <td>Price</td>
+        <td>@Html.DisplayFor(modelItem => Model.CaraPembuatan)</td>
     </tr>
 </table>
 

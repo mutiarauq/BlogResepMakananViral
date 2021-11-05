@@ -10,26 +10,24 @@ namespace MvcMovie.Models
         public int Id { get; set; }
         [StringLength(60, MinimumLength = 3)]
         [Required]
-        public string Title { get; set; }
+        public string NamaMakanan { get; set; }
 
-        [Display(Name = "Release Date")]
-        [DataType(DataType.Date)]
-        public DateTime ReleaseDate { get; set; }
-
-        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
-        [StringLength(30)]
+        [Display(Name = "Kategori")]
+        [StringLength(60)]
         [Required]
-        public string Genre { get; set; }
-        
-        [Column(TypeName = "decimal(18, 2)")]
-        [DataType(DataType.Currency)]
-        [Range(10000, 1000000)]
-        
-        public decimal Price { get; set; }
+        public string Kategori { get; set; }
 
-        [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$")]
-        [StringLength(5)]
+        [StringLength(60)]
         [Required]
-        public string Rating { get; set; }
+        public string Bahan { get; set; }
+        
+        [StringLength(60)]
+        [Required]
+        
+        public decimal Alat { get; set; }
+
+        [StringLength(500)]
+        [Required]
+        public string CaraPembuatan { get; set; }
     }
 }
