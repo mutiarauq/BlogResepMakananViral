@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace MvcMovie.Models
 {
-    public class Kategori : IdentityUser
+    public class Kategori
     {
         public string ID { get; set; }
         public string Cemilan { get; set; }

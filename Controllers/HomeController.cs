@@ -29,15 +29,17 @@ namespace MvcMovie.Controllers
 
         public HomeController(ILogger<HomeController> logger, KatalogDbContext context, UserManager<Pengguna> userManager)
         {
+            
             _logger = logger;
             _context = context;
             _userManager = userManager;
-        }
         
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
+        var ProduksId = _userManager.GetUserId(User);
+        var Pengguna = _context.Users.Find(ProduksId);
+    
         }
+
+    
 
         public IActionResult Index()
         {
@@ -53,6 +55,7 @@ namespace MvcMovie.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            
         }
         
     }

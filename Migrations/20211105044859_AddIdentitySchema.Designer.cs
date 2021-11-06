@@ -9,7 +9,7 @@ using MvcMovie.Data;
 namespace MvcMovie.Migrations
 {
     [DbContext(typeof(KatalogDbContext))]
-    [Migration("20211030051010_AddIdentitySchema")]
+    [Migration("20211105044859_AddIdentitySchema")]
     partial class AddIdentitySchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,10 +94,12 @@ namespace MvcMovie.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("varchar(255)");
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("varchar(255)");
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("longtext");
@@ -134,10 +136,12 @@ namespace MvcMovie.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("varchar(255)");
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("varchar(255)");
+                        .HasMaxLength(128)
+                        .HasColumnType("varchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("longtext");
@@ -147,62 +151,55 @@ namespace MvcMovie.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("MvcMovie.Models.PenambahanMakanan", b =>
+            modelBuilder.Entity("MvcMovie.Models.Movie", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<int>("AccessFailedCount")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("longtext");
+                    b.Property<decimal>("Alat")
+                        .HasMaxLength(60)
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("longtext");
+                    b.Property<string>("Bahan")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("varchar(60)");
 
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<string>("CaraPembuatan")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)");
 
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<string>("Kategori")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("varchar(60)");
 
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetime(6)");
+                    b.Property<string>("NamaMakanan")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("varchar(60)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Movies");
+                });
+
+            modelBuilder.Entity("MvcMovie.Models.PenambahanMakanan", b =>
+                {
+                    b.Property<string>("ID")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("MakananID")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("longtext");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");
 
                     b.Property<string>("TransaksiID")
                         .HasColumnType("longtext");
 
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("tinyint(1)");
+                    b.HasKey("ID");
 
-                    b.Property<string>("UserName")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TodoItems");
+                    b.ToTable("PenambahanMakanan1");
                 });
 
             modelBuilder.Entity("MvcMovie.Models.Pengguna", b =>
@@ -238,9 +235,6 @@ namespace MvcMovie.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
-                    b.Property<string>("Password")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("PasswordHash")
                         .HasColumnType("longtext");
 
@@ -263,9 +257,6 @@ namespace MvcMovie.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
-                    b.Property<string>("Username")
-                        .HasColumnType("longtext");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -278,6 +269,37 @@ namespace MvcMovie.Migrations
                     b.HasIndex("PenggunaId");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("MvcMovie.Models.Produk", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Alat")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Bahan")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("CaraPembuatan")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("NamaMakanan")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("ProduksId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("kategori")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProduksId");
+
+                    b.ToTable("Produk");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -336,6 +358,15 @@ namespace MvcMovie.Migrations
                     b.HasOne("MvcMovie.Models.Pengguna", null)
                         .WithMany("Models")
                         .HasForeignKey("PenggunaId");
+                });
+
+            modelBuilder.Entity("MvcMovie.Models.Produk", b =>
+                {
+                    b.HasOne("MvcMovie.Models.Produk", "Produks")
+                        .WithMany()
+                        .HasForeignKey("ProduksId");
+
+                    b.Navigation("Produks");
                 });
 
             modelBuilder.Entity("MvcMovie.Models.Pengguna", b =>
