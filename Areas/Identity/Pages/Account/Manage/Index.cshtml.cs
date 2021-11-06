@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MvcMovie.Models;
 using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace MvcMovie.Areas.Identity.Pages.Account.Manage
 {
@@ -102,6 +103,16 @@ namespace MvcMovie.Areas.Identity.Pages.Account.Manage
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
+
+            var avatarDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Avatars");
+            Directory.CreateDirectory(avatarDirectory);
+            var extension = Path.GetExtension(Input.AvatarFile?.FileName)?.ToLowerInvariant();
+            var permittedType = new string[] { ".png", ".jpg" };
+            if (string.IsNullOrEmpty(extension) || !permittedType.Contains(extension))
+            {
+             StatusMessage = "Unsupported file type";
+             return RedirectToPage();
+            }
         }
     }
 }
