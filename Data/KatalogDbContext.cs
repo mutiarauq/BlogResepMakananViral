@@ -10,8 +10,9 @@ public class KatalogDbContext : IdentityDbContext<Pengguna>
 public KatalogDbContext (DbContextOptions<KatalogDbContext> options) : base(options)
 { }
 public DbSet<PenambahanMakanan> PenambahanMakanan1 { get; set; }
-public DbSet<Produk> Produk { get; set; }
+public DbSet<Produk> Produks { get; set; }
 public DbSet<Movie> Movies { get; set; }
+
 
 }
 }

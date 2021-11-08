@@ -21,10 +21,11 @@ using MvcMovie.Data;
 namespace MvcMovie.Controllers
 {
     [Authorize]
-    public class HomeController : Controller
+     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> logger;
         private UserManager<Pengguna> _userManager;
+        private ILogger<HomeController> _logger;
         KatalogDbContext _context;
 
         public HomeController(ILogger<HomeController> logger, KatalogDbContext context, UserManager<Pengguna> userManager)
@@ -34,9 +35,8 @@ namespace MvcMovie.Controllers
             _context = context;
             _userManager = userManager;
         
-        var ProduksId = _userManager.GetUserId(User);
-        var Pengguna = _context.Users.Find(ProduksId);
-    
+        var penggunaId = _userManager.GetUserId(User);
+        var pengguna = _context.Users.Find(penggunaId);
         }
 
     
@@ -55,6 +55,7 @@ namespace MvcMovie.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            
             
         }
         

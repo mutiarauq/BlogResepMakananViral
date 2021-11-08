@@ -11,6 +11,6 @@ namespace MvcMovie.Models
         public string Bahan {get; set;}
         public string Alat {get; set;}
         public string CaraPembuatan {get; set;}
-        public virtual Produk Produks { get; set; }
+        
     }
 }

@@ -51,7 +51,6 @@ namespace MvcMovie.Areas.Identity.Pages.Account.Manage
          public string PhoneNumber { get; set; }
          public IFormFile AvatarFile { get; set; }
         }
-
         private async Task LoadAsync(Pengguna user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
