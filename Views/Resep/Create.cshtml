@@ -1,4 +1,4 @@
-@model MvcMovie.Models.Movie
+@model Resep
 @{
     ViewData["NamaMakanan"] = "Home Page";
 }
@@ -16,9 +16,9 @@
                 <span asp-validation-for="NamaMakanan" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Kategori" class="control-label"></label>
-                <input asp-for="Kategori" class="form-control" />
-                <span asp-validation-for="Kategori" class="text-danger"></span>
+                <label asp-for="kategori" class="control-label"></label>
+                <input asp-for="kategori" class="form-control" />
+                <span asp-validation-for="kategori" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Bahan" class="control-label"></label>

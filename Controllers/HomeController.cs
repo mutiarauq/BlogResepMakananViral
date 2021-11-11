@@ -17,35 +17,46 @@ using MvcMovie.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using MvcMovie.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MvcMovie.Controllers
 {
     [Authorize]
      public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> logger;
-        private UserManager<Pengguna> _userManager;
-        private ILogger<HomeController> _logger;
-        KatalogDbContext _context;
-
-        public HomeController(ILogger<HomeController> logger, KatalogDbContext context, UserManager<Pengguna> userManager)
-        {
-            
-            _logger = logger;
-            _context = context;
-            _userManager = userManager;
+              
         
-        var penggunaId = _userManager.GetUserId(User);
-        var pengguna = _context.Users.Find(penggunaId);
+
+    private MvcMovieDbContext _context;
+        public  HomeController(MvcMovieDbContext context)
+        {
+            _context = context;
         }
 
-    
+        public async Task<IActionResult> Index(string searchString, string resepKategori)
+        {
+            var kategoris = _context.produk.Select(x => x.kategori).Distinct();
+            var Produk = _context.produk.AsQueryable();
 
-        public IActionResult Index()
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                Produk = Produk.Where(x => x.NamaMakanan.Contains(searchString));
+            }
+
+            if (!string.IsNullOrEmpty(resepKategori))
+            {
+                Produk = Produk.Where(x => x.kategori == resepKategori);
+            }
+            var viewModel = new ResepKategoriViewModel();
+           
+
+            return View(await Produk.ToListAsync());
+        }
+        public IActionResult Tabel()
         {
             return View();
         }
-
         public IActionResult Privacy()
         {
             return View();

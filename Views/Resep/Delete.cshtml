@@ -1,0 +1,28 @@
+@model Resep
+@{
+    ViewData["NamaMakanan"] = "Delete";
+}
+
+<h1>Confirm delete"@Html.DisplayFor(modelItem => Model.NamaMakanan)"?</h1>
+<table class="table table-hover">
+    <tr>
+        <td>Kategori</td>
+        <td>@Html.DisplayFor(ModelItem => Model.kategori)</td>
+    </tr>
+    <tr>
+        <td>Bahan</td>
+        <td>@Html.DisplayFor(ModelItem => Model.Bahan)</td>
+    <tr>
+        <td>Alat</td>
+        <td>@Html.DisplayFor(ModelItem => Model.Alat)</td>
+    </tr>
+    <tr>
+        <td>Cara Pembuatan</td>
+        <td>@Html.DisplayFor(ModelItem => Model.CaraPembuatan)</td>
+    </tr>
+    
+</table>
+<form asp-controller="Resep" asp-action="DeleteConfirmed" asp-route-id="@Model.Id">
+    <button class="btn btn-danger" type="Submit">Yes</button>
+    <a class="btn btn-primary" asp-controller="Resep" asp-action="Index">Back</a>
+</form>

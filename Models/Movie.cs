@@ -13,7 +13,7 @@ namespace MvcMovie.Models
         public string NamaMakanan { get; set; }
 
         [Display(Name = "Kategori")]
-        [StringLength(60)]
+        [StringLength(200)]
         [Required]
         public string Kategori { get; set; }
 
@@ -21,13 +21,16 @@ namespace MvcMovie.Models
         [Required]
         public string Bahan { get; set; }
         
-        [StringLength(60)]
+        [StringLength(500)]
         [Required]
         
-        public decimal Alat { get; set; }
+        public string Alat { get; set; }
 
         [StringLength(500)]
         [Required]
         public string CaraPembuatan { get; set; }
-    }
+
+        
+    } 
+    
 }

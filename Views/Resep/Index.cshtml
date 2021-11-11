@@ -1,0 +1,48 @@
+@model IEnumerable<Resep>
+@{
+    ViewData["NamaMakanan"] = "Home Page";
+}
+
+<div>
+    <h1 class="display-4">Daftar Resep</h1>
+    <a asp-controller="Resep" asp-action="Create">Create New Resep</a>
+    <form asp-controller="Resep" asp-action="Index" method="GET">
+        <p>
+            Nama Makanan:  <input name="searchString" type="text">
+            <button type="submit">Filter</button>
+        </p>
+    </form>
+    <table class="table"> 
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                <th>@Html.DisplayNameFor(model => model.NamaMakanan)</th>
+                <th>@Html.DisplayNameFor(model => model.kategori)</th>
+                <th>@Html.DisplayNameFor(model => model.Bahan)</th>
+                <th>@Html.DisplayNameFor(model => model.Alat)</th>
+                <th>@Html.DisplayNameFor(model => model.CaraPembuatan)</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+           @foreach (var item in Model)
+           {
+              <tr>
+
+                  <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                  <td>@Html.DisplayFor(modelItem => item.NamaMakanan)</td>
+                  <td>@Html.DisplayFor(modelItem => item.kategori)</td>
+                  <td>@Html.DisplayFor(modelItem => item.Bahan)</td>
+                  <td>@Html.DisplayFor(modelItem => item.Alat)</td>
+                  <td>@Html.DisplayFor(modelItem => item.CaraPembuatan)</td>
+                  <td>
+                      <a asp-controller="Resep" asp-action="Edit" asp-route-id="@item.Id">|Edit|</a> 
+                      <a asp-controller="Resep" asp-action="Details" asp-route-id="@item.Id">|Details|</a>
+                      <a asp-controller="Resep" asp-action="Delete" asp-route-id="@item.Id">|Delete|</a>
+                  </td>
+              </tr>
+
+           }
+        </tbody>
+    </table>
+</div>

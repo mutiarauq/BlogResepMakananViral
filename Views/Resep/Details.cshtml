@@ -1,0 +1,26 @@
+@model Resep
+
+@{
+    ViewData["NamaMakanan"] = "Details";
+}
+
+<h1>@Html.DisplayFor(modelItem => Model.NamaMakanan)</h1>
+<table class="table table-hover">
+    
+    <tr>
+        <td>Kategori</td>
+        <td>@Html.DisplayFor(modelItem => Model.kategori)</td>
+    </tr>
+    <tr>
+        <td>Bahan</td>
+        <td>@Html.DisplayFor(modelItem => Model.Bahan)</td>
+    </tr>
+    <tr>
+        <td>Alat</td>
+        <td>@Html.DisplayFor(modelItem => Model.Alat)</td>
+    </tr>
+    <tr>
+        <td>Cara Pembuatan</td>
+        <td>@Html.DisplayFor(modelItem => Model.CaraPembuatan)</td>
+    </tr>
+</table>

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MvcMovie.Data;
 
 namespace MvcMovie.Migrations
 {
-    [DbContext(typeof(KatalogDbContext))]
-    partial class KatalogDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(MvcMovieDbContext))]
+    [Migration("20211110072549_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,57 +151,6 @@ namespace MvcMovie.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("MvcMovie.Models.Movie", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Alat")
-                        .HasMaxLength(60)
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<string>("Bahan")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("varchar(60)");
-
-                    b.Property<string>("CaraPembuatan")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
-
-                    b.Property<string>("Kategori")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("varchar(60)");
-
-                    b.Property<string>("NamaMakanan")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("varchar(60)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Movies");
-                });
-
-            modelBuilder.Entity("MvcMovie.Models.PenambahanMakanan", b =>
-                {
-                    b.Property<string>("ID")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("MakananID")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("TransaksiID")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("PenambahanMakanan1");
-                });
-
             modelBuilder.Entity("MvcMovie.Models.Pengguna", b =>
                 {
                     b.Property<string>("Id")
@@ -272,7 +223,7 @@ namespace MvcMovie.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("MvcMovie.Models.Produk", b =>
+            modelBuilder.Entity("MvcMovie.Models.Resep", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -290,17 +241,12 @@ namespace MvcMovie.Migrations
                     b.Property<string>("NamaMakanan")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("ProduksId")
-                        .HasColumnType("int");
-
                     b.Property<string>("kategori")
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProduksId");
-
-                    b.ToTable("Produk");
+                    b.ToTable("produk");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -359,15 +305,6 @@ namespace MvcMovie.Migrations
                     b.HasOne("MvcMovie.Models.Pengguna", null)
                         .WithMany("Models")
                         .HasForeignKey("PenggunaId");
-                });
-
-            modelBuilder.Entity("MvcMovie.Models.Produk", b =>
-                {
-                    b.HasOne("MvcMovie.Models.Produk", "Produks")
-                        .WithMany()
-                        .HasForeignKey("ProduksId");
-
-                    b.Navigation("Produks");
                 });
 
             modelBuilder.Entity("MvcMovie.Models.Pengguna", b =>
