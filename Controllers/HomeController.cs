@@ -23,20 +23,17 @@ namespace MvcMovie.Controllers
     [Authorize]
      public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> logger;
+       
         private UserManager<Pengguna> _userManager;
         private ILogger<HomeController> _logger;
-        KatalogDbContext _context;
+        MvcMovieDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger, KatalogDbContext context, UserManager<Pengguna> userManager)
+        public HomeController(ILogger<HomeController> logger, MvcMovieDbContext context, UserManager<Pengguna> userManager)
         {
             
             _logger = logger;
             _context = context;
             _userManager = userManager;
-        
-        var penggunaId = _userManager.GetUserId(User);
-        var pengguna = _context.Users.Find(penggunaId);
         }
 
     
@@ -45,7 +42,10 @@ namespace MvcMovie.Controllers
         {
             return View();
         }
-
+        public IActionResult Tabel()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

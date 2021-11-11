@@ -30,9 +30,9 @@ namespace MvcMovie
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<KatalogDbContext>(option =>
+            services.AddDbContext<MvcMovieDbContext>(option =>
             {
-                var connectionString = Configuration.GetConnectionString("resep");
+                var connectionString = Configuration.GetConnectionString("ResepApp");
                 var serverVersion = new MariaDbServerVersion(new Version(10, 6, 4));
                 option.UseMySql(connectionString, serverVersion);
                  
@@ -41,7 +41,7 @@ namespace MvcMovie
             
             services
                .AddDefaultIdentity<Pengguna>()
-               .AddEntityFrameworkStores<KatalogDbContext>()
+               .AddEntityFrameworkStores<MvcMovieDbContext>()
                .AddDefaultTokenProviders();
                services.AddRazorPages();
     }
