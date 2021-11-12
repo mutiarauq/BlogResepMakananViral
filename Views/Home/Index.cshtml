@@ -7,7 +7,12 @@
     <h1 class="display-4"><strong>Katalog Resep Makanan Viral</strong></h1>
     <p><strong>Temukan berbagai macam resep viral disini</strong></a></p>
 </div>
-
+<form asp-controller="Home" asp-action="Index" method="GET">
+        <p>
+            Nama Makanan:  <input name="searchString" type="text">
+            <button type="submit">Filter</button>
+        </p>
+    </form>
 <table style="margin-left:20em"> 
         <thead>
             <tr>

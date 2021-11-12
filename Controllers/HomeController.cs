@@ -25,7 +25,8 @@ namespace MvcMovie.Controllers
     [Authorize]
      public class HomeController : Controller
     {
-              
+       
+        
         
 
     private MvcMovieDbContext _context;
@@ -62,6 +63,11 @@ namespace MvcMovie.Controllers
             return View();
         }
 
+        public IActionResult Details(int id)
+        {
+            var resep = _context.produk.Find(id);
+            return View(resep);
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

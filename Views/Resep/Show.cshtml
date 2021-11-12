@@ -1,0 +1,29 @@
+@model Resep
+@{
+    ViewData["NamaMakanan"] = "Home Page";
+}
+<h1>Confirm delete"@Html.DisplayFor(modelItem => Model.NamaMakanan)"?</h1>
+<table class="table table-hover">
+    
+    <tr>
+        <td>Release Data</td>
+        <td>@Html.DisplayFor(modelItem => Model.kategori)</td>
+    </tr>
+    <tr>
+        <td>Genre</td>
+        <td>@Html.DisplayFor(modelItem => Model.Bahan)</td>
+    </tr>
+    <tr>
+        <td>Price</td>
+        <td>@Html.DisplayFor(modelItem => Model.Alat)</td>
+    </tr>
+    <tr>
+        <td>Price</td>
+        <td>@Html.DisplayFor(modelItem => Model.CaraPembuatan)</td>
+    </tr>
+</table>
+
+<form asp-controller="Movie"asp-action="DeleteConfirmed" asp-route-id="@Model.Id">
+    <button class="btn btn-danger" type="submit">Yes</button>
+    <a class="btn btn-primary" asp-controller="Movie" asp-action="Index">Back</a>
+</form>
